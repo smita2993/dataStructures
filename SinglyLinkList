@@ -1,0 +1,116 @@
+#include <iostream>
+
+using namespace std;
+
+struct node{
+    node *next;
+    int data;
+    node(int data1){
+        next=NULL;
+        data = data1;
+    }
+};
+
+void displaynode(node *head){
+   
+   if(head == NULL)
+     std::cout << "list is empty \n";
+    else
+    {
+        node *curr = head;
+        while(curr != NULL)
+        {
+            cout << curr->data << "\n";
+            curr = curr->next;
+        }
+    }
+}
+
+
+node* insertAtHead(node *head,int data)
+{
+    if(head==NULL)
+    {
+        std::cout << "head is null \n";
+        head = new node(data);
+        
+    }
+    else
+    {
+       node *newhead = new node(data); 
+       newhead->next = head;
+       head = newhead;
+    }
+    
+    return head;
+    
+}
+
+
+node* insertAtEnd(node *head,int data)
+{
+    if(head==NULL)
+    {
+        head = new node(data);
+        
+    }
+    else
+    {
+        node *curr = head;
+        if(curr->next != NULL)
+        curr = curr->next;
+        
+        node *newNode = new node(data);
+        curr->next = newNode;
+    }
+    
+    return head;
+}
+
+
+node* reverseLinkList(node *head){
+    
+    node* current = head;
+        node *prev = NULL, *next = NULL;
+ 
+        while (current != NULL) {
+           next = current->next;
+           
+           current->next = prev;
+           prev = current;
+           
+           current = next;
+           
+        }
+        head = prev;
+        return head;
+   /* node *curr = head, *prev=NULL, *next=NULL;
+    while(curr != NULL)
+    {
+        next = curr->next;
+        
+        curr->next = prev;
+        prev = curr;
+        
+        curr = next;
+    }
+    
+    head = prev;*/
+    
+
+    
+    //return head;
+}
+
+
+int main()
+{
+    node *head = NULL;
+    
+    head = insertAtEnd(head,1);
+    head = insertAtEnd(head,2);
+   // displaynode(head);
+   // head = insertAtEnd(head,3);
+    head = reverseLinkList(head);
+    displaynode(head);
+}
